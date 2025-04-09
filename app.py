@@ -11,7 +11,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Ensure folder exists
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # MongoDB setup
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb+srv://compassuser:test1234@cluster-1.avler13.mongodb.net/admin?retryWrites=true&w=majority')
 db = client['aptitude_db']
 blogs_collection = db['blogs']
 
