@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ blog.title }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 40px;
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+            color: #8e44ad;
+            margin-bottom: 30px;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            width: 400px;
+            margin: 0 auto 30px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            text-align: justify;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        a:hover {
+            color: #1e5f8a;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ blog.title }}</h1>
+
+    {% if blog.image %}
+        <img src="{{ url_for('static', filename='uploads/' + blog.image) }}" alt="Temple Image">
+    {% endif %}
+
+    <p>{{ blog.description }}</p>
+
+    <a href="{{ url_for('index') }}">← Back</a>
+</body>
+</html>

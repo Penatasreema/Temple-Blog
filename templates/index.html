@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temple Blogs</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #779fdb;
+            margin: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .blog-card {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .blog-card:hover {
+            transform: scale(1.02);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .blog-card h2 {
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+
+        .blog-card h2 a {
+            text-decoration: none;
+            color: #8e44ad;
+        }
+
+        .blog-card h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .add-blog-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .add-blog-link:hover {
+            color: #1e8449;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temple Blogs</h1>
+
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search by title..." value="{{ query or '' }}">
+        <input type="submit" value="Search">
+    </form>
+
+    {% if blogs %}
+    <div class="blog-grid">
+        {% for blog in blogs %}
+            <div class="blog-card">
+                {% if blog.image %}
+                    <img src="{{ url_for('static', filename='uploads/' + blog.image) }}" alt="Blog Image">
+                {% endif %}
+                <h2><a href="{{ url_for('blog', blog_id=blog['_id']) }}">{{ blog.title }}</a></h2>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No blogs found.</p>
+    {% endif %}
+
+    <a class="add-blog-link" href="{{ url_for('add_blog') }}">➕ Add New Blog</a>
+</body>
+</html>
